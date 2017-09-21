@@ -21,6 +21,7 @@ http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/
     </flow>
     <flow name="maven-projectFlow1">
         <jms:inbound-endpoint queue="vm" connector-ref="Active_MQ" doc:name="JMS"/>
+        <logger message="In flow maven-projectFlow1" level="INFO" doc:name="Logger"/>
         <logger message="#[message.payload]" level="INFO" doc:name="Logger"/>
     </flow>
     <flow name="retrieveFlights">
@@ -29,6 +30,6 @@ http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/
             <db:parameterized-query><![CDATA[SELECT * FROM FLIGHTS]]></db:parameterized-query>
         </db:select>
         <object-to-string-transformer doc:name="Object to String"/>
-        <jms:outbound-endpoint queue="vm" connector-ref="Active_MQ" doc:name="Active_MQ"/>
+        <jms:outbound-endpoint queue="vm" connector-ref="Active_MQ" doc:name="JMS"/>
     </flow>
 </mule>
